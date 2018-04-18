@@ -26,7 +26,7 @@ class AlbumForm extends Form
             ],
         ]);
         $this->add([
-            'name' => 'artist',
+            'name' => 'body',
             'type' => 'text',
             'options' => [
                 'label' => 'Artist',

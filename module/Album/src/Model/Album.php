@@ -10,7 +10,6 @@ use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
 use Zend\Filter\ToInt;
 use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Validator\StringLength;
 
@@ -18,7 +17,7 @@ use Zend\Validator\StringLength;
 class Album
 {
     public $id;
-    public $artist;
+    public $body;
     public $title;
 
     private $inputFilter;
@@ -26,9 +25,20 @@ class Album
     public function exchangeArray(array $data)
     {
         $this->id     = !empty($data['id']) ? $data['id'] : null;
-        $this->artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this->body = !empty($data['body']) ? $data['body'] : null;
         $this->title  = !empty($data['title']) ? $data['title'] : null;
     }
+
+    // Add the following method:
+    public function getArrayCopy()
+    {
+        return [
+            'id'     => $this->id,
+            'body' => $this->body,
+            'title'  => $this->title,
+        ];
+    }
+
 
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
@@ -55,7 +65,7 @@ class Album
         ]);
 
         $inputFilter->add([
-            'name' => 'artist',
+            'name' => 'body',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],

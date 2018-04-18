@@ -41,7 +41,7 @@ class AlbumTable
     public function saveAlbum(Album $album)
     {
         $data = [
-            'artist' => $album->artist,
+            'body' => $album->body,
             'title'  => $album->title,
         ];
 
